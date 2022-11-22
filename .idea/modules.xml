@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/KaTascs.iml" filepath="$PROJECT_DIR$/.idea/KaTascs.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/KaTasks.iml" filepath="$PROJECT_DIR$/.idea/KaTasks.iml" />
     </modules>
   </component>
 </project>

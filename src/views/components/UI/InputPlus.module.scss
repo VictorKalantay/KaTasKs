@@ -1,0 +1,43 @@
+.inputPlus {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 45px;
+  margin-bottom: 20px;
+
+
+  &Field {
+
+    border: 1px solid #b1b1b1;
+    border-right: none;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    padding: 10px;
+    font: 1rem/1.4 'Roboto', sans-serif;
+    background: #DBE2EF;
+    &::placeholder {
+     color: #7B7B7B;
+
+    }
+    &:focus-visible {
+      outline: none;
+      border-color: #3F72AF;
+    }
+  }
+
+  &Button {
+    border: 0;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    cursor: pointer;
+    background: #3F72AF url('../../../assets/icons/plus.svg') no-repeat center;
+    transition: 0.5s;
+    &:hover {
+      opacity: 0.9;
+      transition: 0.5s;
+    }
+    &:active {
+      opacity: 0.6;
+      transition: 0.5s;
+    }
+  }
+}

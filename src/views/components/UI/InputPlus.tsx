@@ -10,7 +10,7 @@ export const InputPlus: React.FC<InputPlusProps> = ({onAdd}) => {
     const addTask = useCallback(() => {
         onAdd(inputValue)
         setInputValue('')
-    }, [inputValue])
+    }, [inputValue, onAdd])
     return (
         <div className={classes.inputPlus}>
             <input

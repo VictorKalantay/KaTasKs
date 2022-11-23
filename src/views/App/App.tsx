@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {useTasksStore} from "../../data/stores/useTasksStore";
 import classes from './App.module.scss';
 import {InputPlus} from "../components/UI/InputPlus";

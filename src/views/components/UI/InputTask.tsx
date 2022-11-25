@@ -1,5 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react';
 import classes from "./InputTask.module.scss";
+import Klipartz from '../../../assets/icons/klipartz.png'
 
 interface InputTaskProps {
     id: string
@@ -28,6 +29,7 @@ export const InputTask: React.FC<InputTaskProps> = ({
     },[isEditMode])
     return (
         <div className={classes.inputTask}>
+            <img className={classes.inputTaskImage} src={Klipartz} alt={'qqq'} />
             <div className={classes.inputTaskLabel}>
                 <input
                     className={classes.inputTaskCheckbox}

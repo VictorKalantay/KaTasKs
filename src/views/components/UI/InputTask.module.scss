@@ -1,19 +1,26 @@
 .inputTask {
+  position: relative;
   display: grid;
   grid-template-columns: 1fr 50px 50px;
   margin-bottom: 20px;
   background: #ffe995;
   border-right: 5px;
-  min-height: 60px;
+  min-height: 80px;
   opacity: 0.9;
   box-shadow: 2px 1px 8px 2px #000;
-
+  &Image {
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    left: 50%;
+    top: 5px;
+  }
 
   &Label {
     display: grid;
     grid-template-columns: auto 1fr;
     align-items: center;
-    padding: 15px;
+    padding: 25px 15px 15px;
     cursor: pointer;
   }
 

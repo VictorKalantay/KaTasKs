@@ -1,11 +1,12 @@
 import create from "zustand";
 import {generateId} from '../helpers'
+import {devtools} from "zustand/middleware";
 
 interface Task {
     id: string;
     title: string;
     createdAt: number;
-    //deletedAt?:number
+    deletedAt?:number
 }
 
 interface TasksStore {
@@ -16,14 +17,11 @@ interface TasksStore {
 }
 
 
-export const useTasksStore = create<TasksStore>((set, get) => ({
-    tasks: [
-        {
-            id: 'asdjadadfskldas',
-            title: 'Тестовая таска' ,
-            createdAt: 2232323
-        }
-    ],
+
+const currentTasks = (JSON.parse(window.localStorage.getItem('tasks') || '[]'))
+
+export const useTasksStore = create<TasksStore>()(devtools ((set, get) => ({
+    tasks: currentTasks,
     createTask: (title) => {
         const {tasks} = get()
         const newTask = {
@@ -33,8 +31,9 @@ export const useTasksStore = create<TasksStore>((set, get) => ({
         }
         set({
             tasks: [newTask].concat(tasks),
-        })
 
+        })
+        window.localStorage.setItem('tasks', JSON.stringify([newTask].concat(tasks)))
     },
     updateTask: (id: string, title: string) => {
         const {tasks} = get()
@@ -44,14 +43,19 @@ export const useTasksStore = create<TasksStore>((set, get) => ({
                 title: task.id === id ? title : task.title,
             }))
         })
-
+        window.localStorage.setItem('tasks', JSON.stringify(tasks.map((task) => ({
+                ...task,
+                title: task.id === id ? title : task.title,
+            }))
+        ))
     },
     removeTask: (id) => {
         const {tasks} = get()
         set({
             tasks: tasks.filter((task) => task.id !== id)
         })
+        window.localStorage.setItem('tasks', JSON.stringify( tasks.filter((task) => task.id !== id)
+         ))
     }
-}))
+})))
 
-export {}

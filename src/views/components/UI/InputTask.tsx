@@ -1,10 +1,10 @@
-import React, {useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import classes from "./InputTask.module.scss";
 
 interface InputTaskProps {
     id: string
     title: string
-    onDone: (id: string) => void
+    onDone: (id: string, deletedAt: number) => void
     onEdited: (id: string, title: string) => void
     onRemoved: (id: string, deletedAt: number) => void
 }
@@ -20,9 +20,15 @@ export const InputTask: React.FC<InputTaskProps> = ({
     const [checked, setChecked] = useState(false)
     const [isEditMode, setIsEditMode] = useState(false)
     const [value, setValue] = useState(title)
+    const editTitleInputRef = useRef<HTMLInputElement>(null)
+    useEffect(()=>{
+        if(isEditMode) {
+            editTitleInputRef?.current?.focus()
+        }
+    },[isEditMode])
     return (
         <div className={classes.inputTask}>
-            <label className={classes.inputTaskLabel}>
+            <div className={classes.inputTaskLabel}>
                 <input
                     className={classes.inputTaskCheckbox}
                     type='checkbox'
@@ -31,7 +37,7 @@ export const InputTask: React.FC<InputTaskProps> = ({
                     onChange={(evt) => {
                         setChecked(evt.target.checked)
                         if (evt.target.checked) {
-                            onDone(id)
+                            onDone(id, Date.now())
                         }
                     }}
                 />
@@ -39,15 +45,23 @@ export const InputTask: React.FC<InputTaskProps> = ({
                     (<input
                         className={classes.inputTaskEditTitle}
                         value={value}
+                        ref={editTitleInputRef}
                         onChange={evt => {
                             setValue(evt.target.value)
+                        }
+                        }
+                        onKeyDown={(evt)=> {
+                            if(evt.key ==='Enter') {
+                                onEdited(id, value)
+                                setIsEditMode(false)
+                            }
                         }
                         }
 
                     />) :
                     <h3 className={classes.inputTaskTitle}>{title}</h3>
                 }
-            </label>
+            </div>
             { isEditMode ?
                 (<button
                     className={classes.inputTaskSave}

@@ -36,7 +36,7 @@ export const App:React.FC = () => {
                         key={task.id}
                         id={task.id}
                         title={task.title}
-                        onDone={()=>{}}
+                        onDone={removeTask}
                         onEdited={updateTask}
                         onRemoved={removeTask}
                     />

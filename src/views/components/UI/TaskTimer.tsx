@@ -81,7 +81,7 @@ export const TaskTimer: React.FC<TimerTaskProps> = (
 
     useEffect(() => {
         updateTimer(id, ticks)
-    },[updater]);
+    },[updater]); // eslint-disable-line
 
 
     return (

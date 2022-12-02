@@ -5,8 +5,10 @@ import {devtools} from "zustand/middleware";
 interface Task {
     id: string;
     title: string;
+    timer: number;
     createdAt: number;
-    deletedAt?:number
+    deletedAt?:number;
+
 }
 
 interface TasksStore {
@@ -14,7 +16,9 @@ interface TasksStore {
     createTask: (title: string) => void;
     updateTask: (id: string, title: string) => void;
     removeTask: (id: string, deletedAt: number) => void;
+    updateTimer: (id: string, timer: number) => void;
 }
+
 
 
 
@@ -27,6 +31,7 @@ export const useTasksStore = create<TasksStore>()(devtools ((set, get) => ({
         const newTask = {
             id: generateId(),
             title,
+            timer: 0,
             createdAt: Date.now(),
         }
         set({
@@ -56,6 +61,23 @@ export const useTasksStore = create<TasksStore>()(devtools ((set, get) => ({
         })
         window.localStorage.setItem('tasks', JSON.stringify( tasks.filter((task) => task.id !== id)
          ))
-    }
+    },
+    updateTimer: (id:string, timer: number) => {
+        const {tasks} = get()
+        set({
+            tasks: tasks.map((task) => ({
+                ...task,
+                timer: task.id === id ? timer : task.timer,
+            }))
+        })
+        console.log('qwe')
+        window.localStorage.setItem('tasks', JSON.stringify(tasks.map((task) => ({
+                ...task,
+                timer: task.id === id ? timer : task.timer,
+            }))
+        ))
+    },
+
+
 })))
 

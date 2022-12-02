@@ -1,7 +1,8 @@
 .inputTask {
   position: relative;
-  display: grid;
-  grid-template-columns: 1fr 50px 50px;
+  display: flex;
+  flex-direction: column;
+
   margin-bottom: 20px;
   background: #ffe995;
   border-right: 5px;
@@ -18,10 +19,11 @@
 
   &Label {
     display: grid;
-    grid-template-columns: auto 1fr;
+    grid-template-columns: auto 1fr 50px 50px 50px;
     align-items: center;
     padding: 25px 15px 15px;
     cursor: pointer;
+    min-height: 40px;
   }
 
   &Checkbox {
@@ -46,7 +48,8 @@
     outline: none;
     background: none;
   }
-  &Edit, &Remove, &Save {
+  &Time, &Edit, &Remove, &Save {
+    height: 100%;
     display: block;
     border: none;
     background: none no-repeat center;
@@ -61,6 +64,11 @@
     }
   }
 
+  &Time {
+    background-image: url("../../../assets/icons/time-main.svg");
+
+  }
+
   &Edit {
     background-image: url("../../../assets/icons/edit.svg");
 
@@ -72,5 +80,20 @@
 
   &Save {
     background-image: url("../../../assets/icons/check.svg");
+  }
+
+  &TimeModeOn {
+    position: relative;
+    height: 50px;
+    padding-bottom: 20px;
+    bottom: 0;
+    opacity: 1;
+    transition: 1s, opacity 2.5s;
+  }
+  &TimeModeOff {
+    height: 0;
+    bottom: 50px;
+    opacity: 0;
+    transition: 1s, opacity 0.5s;
   }
 }

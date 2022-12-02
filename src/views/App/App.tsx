@@ -10,12 +10,15 @@ export const App:React.FC = () => {
        tasks,
        createTask,
        updateTask,
-       removeTask
+       removeTask,
+       updateTimer
    ] = useTasksStore(state => [
        state.tasks,
        state.createTask,
        state.updateTask,
-       state.removeTask
+       state.removeTask,
+       state.updateTimer,
+
    ])
 
     return (
@@ -31,14 +34,19 @@ export const App:React.FC = () => {
             </section>
             <section className={classes.articleSection}>
                 {!tasks.length && (<p className={classes.articleText}>You don't have tasks</p>)}
-                {tasks.map((task) => (
+                {
+                    tasks.map((task) => (
+
                     <InputTask
+
                         key={task.id}
                         id={task.id}
                         title={task.title}
+                        timer={task.timer}
                         onDone={removeTask}
                         onEdited={updateTask}
                         onRemoved={removeTask}
+                        updateTimer={updateTimer}
                     />
                 ))}
             </section>
